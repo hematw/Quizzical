@@ -1,40 +1,27 @@
+import { useState } from 'react'
 import Blobs from './components/Blobs'
 import Intro from './components/Intro'
-import Question from './components/Question'
-import data from "./data"
+import Questions from './components/Questions'
 import './App.css'
-import Button from './components/Button'
+// import data from "./data"
 
 
-const questions = data.results
-
-function handleSubmit(e) {
-  e.preventDefault()
-}
 
 function App() {
+  const [isStarted, setIsStarted] = useState(false)
 
   return (
-    <main className='overflow-auto pt-8 text-[#4d5b9e] flex items-center justify-center'>
+    <>
       <Blobs />
-      <div>
-        <form onSubmit={handleSubmit}>
-          {
-            questions ?
-              questions.map((q, index) =>
-                <Question
-                  q={q}
-                  qNum={`q${index + 1}`}
-                  key={index}
-                />
-              ) : <Intro />
-          }
-          <div className='text-center'>
-            <Button text="Check answers" />
-          </div>
-        </form>
-      </div>
-    </main>
+      <main
+        className='overflow-auto text-[#4d5b9e] flex items-center justify-center m-auto w-[60vw] min-h-screen'>
+        {
+          isStarted
+            ? <Questions />
+            : <Intro handleClick={() => setIsStarted(true)} />
+        }
+      </main>
+    </>
   )
 }
 

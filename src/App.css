@@ -1,7 +1,7 @@
-body  {
+body {
   background-color: #F5F7FB;
   overflow: hidden;
-  font-family: "Noto Sans", sans-serif;
+  font-family: 'Karla', sans-serif;
   box-sizing: border-box;
 }
 
@@ -16,14 +16,14 @@ body  {
   top: -17%;
   right: -10%;
   background-color: #fffad1;
-  border-radius: 69% 31% 31% 69% / 49% 48% 52% 51% ;
+  border-radius: 69% 31% 31% 69% / 49% 48% 52% 51%;
 }
 
 .bottom-blob {
   bottom: -17%;
   left: -10%;
   background-color: #DEEBF8;
-  border-radius: 52% 48% 71% 29% / 49% 48% 52% 51% ;
+  border-radius: 52% 48% 71% 29% / 49% 48% 52% 51%;
 }
 
 input[type="radio"] {
@@ -34,4 +34,14 @@ input[type="radio"] {
 label:has(input[type="radio"]:checked) {
   background-color: #d6dbf5;
   border-color: transparent;
+}
+
+label:has(input[type="radio"]:checked).correct,
+label.correct {
+  background-color: #94D7A2;
+  border-color: transparent;
+}
+
+label:has(input[type="radio"]:checked).incorrect {
+  background-color: #F6D9DB;
 }
