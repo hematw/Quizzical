@@ -11,17 +11,17 @@ function App() {
   const [isStarted, setIsStarted] = useState(false)
 
   return (
-    <>
+    <div className='relative overflow-hidden'>
       <Blobs />
       <main
-        className='overflow-auto text-[#4d5b9e] flex items-center justify-center m-auto w-[60vw] min-h-screen'>
+        className='text-[#4d5b9e] flex items-center p-6 my-8 mx-auto max-w-[765px] min-h-screen'>
         {
           isStarted
             ? <Questions />
             : <Intro handleClick={() => setIsStarted(true)} />
         }
       </main>
-    </>
+    </div>
   )
 }
 

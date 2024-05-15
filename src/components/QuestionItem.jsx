@@ -1,46 +1,37 @@
 import he from "he"
 import { useEffect, useState } from "react"
 
-export default function Question({ q, qNum, handleChange, isShow, className }) {
-    const [answersArray, setAnswersArray] = useState(
-        [
-            q.correct_answer,
-            ...q.incorrect_answers
-        ]
-    )
-
-    q.question = he.decode(q.question)
+export default function QuestionItem({ q, qNum, handleChange, isShow, myAnswers }) {
+    const [answersArray, setAnswersArray] = useState([])
 
     useEffect(() => {
-        setAnswersArray(prevArray =>
-            prevArray.sort(() => Math.random() - 0.5)
-        )
-    }, [])
+        const shuffledAnswers = [q.correct_answer, ...q.incorrect_answers].sort(() => Math.random() - 0.5)
+        setAnswersArray(shuffledAnswers)
+    }, [q])
 
 
     return (
         <div className="py-4 border-b-2">
-            <h1 className="text-lg font-semibold">{q.question}</h1>
-            <div className="flex gap-4 mt-4">
+            <h1 className="text-lg font-semibold">{he.decode(q.question)}</h1>
+            <div className="flex gap-4 mt-4 flex-wrap">
                 {
-                    answersArray.map(ans => {
-                        className = (ans === q.correct_answer) ? "correct" : "incorrect"
-
+                    answersArray.map((ans, idx) => {
+                        const answerClassName = (ans === q.correct_answer) ? "correct" : "incorrect"
                         return (
                             <label
-                                className={
-                                    `px-4 py-1 text-sm border-2 border-[#4d5b9e] rounded-2xl cursor-pointer ${isShow ? className : ""}`
-                                }
-                                key={ans}
-                                onChange={handleChange}
+                                className={`px-4 py-1 text-sm border-2 border-[#4d5b9e] rounded-2xl cursor-pointer ${isShow ? answerClassName : ""}`}
+                                key={idx}
                             >
                                 <input
                                     type="radio"
                                     name={qNum}
                                     value={ans}
-                                    className={className}
+                                    onChange={handleChange}
+                                    checked={myAnswers[qNum] === ans}
+                                    className={answerClassName}
+                                    disabled={isShow}
                                 />
-                                {ans}
+                                {he.decode(ans)}
                             </label>
                         )
                     })

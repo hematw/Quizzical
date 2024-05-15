@@ -1,8 +1,6 @@
 body {
   background-color: #F5F7FB;
-  overflow: hidden;
   font-family: 'Karla', sans-serif;
-  box-sizing: border-box;
 }
 
 .blob {
